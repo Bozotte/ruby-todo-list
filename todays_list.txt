@@ -1,12 +1,14 @@
 My list for 2016-04-21:
 
-[ X ] Walk the cat
-[ X ] Go to the gym
-[   ] Buy groceries for the week
-[   ] Call Penelope
-[   ] Finish code challenge
-[   ] Book hotel for vacation
-[   ] Call insurance company
-[   ] Read Ruby Under a Microscope
-[   ] Book eye appointment for new glasses
-[   ] Find good recipe for dinner party
+[ ] Walk the cat 
+[ ] Go to the gym 
+[ ] Buy groceries for the week [personal]
+[ ] Call Penelope [personal]
+[ ] Finish code challenge [code]
+[X] Book hotel for vacation 
+[ ] Call insurance company 
+[ ] Read Ruby Under a Microscope 
+[X] Book eye appointment for new glasses 
+[ ] Find good recipe for dinner party 
+[ ] Read POODR [code]
+[ ] go to the gym 

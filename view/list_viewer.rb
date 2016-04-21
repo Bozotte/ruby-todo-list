@@ -1,15 +1,41 @@
 module ListViewer
-  def print_list
-    puts "\nYour todo list:\n\n"
-    todo_list.list.each do |item|
-      checked = item.checked ? item.checked : " "
-      puts "[ #{checked} ] #{item.item}"
+  def display(list)
+    puts
+    list.each do |item|
+      checked = item.checked ? item.checked.colorize(:green) : " "
+      tags = ""
+      tags << "[#{item.personal}]".colorize(:yellow) if item.personal
+      tags << "[#{item.code}]".colorize(:light_blue) if item.code
+      puts "[#{checked}] #{item.item} #{tags}"
     end
     puts
   end
 
+  def ask_for_tag_to_display
+    print "Display items tagged with what tag?   "
+    input
+  end
+
+  def display_by_tag(tag)
+    list = todo_list.list.select{|item| item.send(tag) != nil }
+    puts "\n#{tag.capitalize}:"
+    display(list)
+  end
+
+  def show_completed
+    list = todo_list.list.select{|item| item.checked }
+    puts "\nCompleted:"
+    display(list)
+  end
+
+  def show_uncompleted
+    list = todo_list.list.select{|item| item.checked.nil? }
+    puts "\nUnfinished:"
+    display(list)
+  end
+
   def request_unavailable(request)
-    puts "Your request: #{request}\nThis is not available."
+    puts "Your request: #{request}\nThis is not available.\n\n"
   end
 
   def greet
@@ -23,8 +49,10 @@ module ListViewer
     puts "-------------------------------"
     puts "     Available commands: \n\n"
     puts "  display, add, add multiple, "
+    puts "  tag, untag, display by tag,"
     puts "   check off, check off all,"
-    puts " uncheck all, delete, delete all"
+    puts " uncheck all, delete, delete all,"
+    puts " show completed, show uncompleted,"
     puts "             quit               \n\n"
     puts "-------------------------------"
   end
@@ -33,6 +61,11 @@ module ListViewer
     puts "\nEnter items like so: walk the cat, eat food, shower"
     print "Items to add:   "
     input.split(", ")
+  end
+
+  def tag_as_personal_or_code(tag)
+    print "#{tag.capitalize} personal or code?  "
+    input
   end
 
   def get_command

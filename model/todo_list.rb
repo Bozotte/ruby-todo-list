@@ -54,10 +54,30 @@ class TodoList
     save
   end
 
+  def tag(tag_array)
+    item = tag_array[0].downcase.split[0]
+    tag = tag_array[1]
+    @list.map! do |el|
+      el.send("#{tag}=", tag) if el.item.downcase.include?(item)
+      el
+    end
+    save
+  end
+
+  def untag(tag_array)
+    item = tag_array[0].downcase.split[0]
+    tag = tag_array[1]
+    @list.map! do |el|
+      el.send("#{tag}=", nil) if el.item.downcase.include?(item)
+      el
+    end
+    save
+  end
+
   def save
     CSV.open('todo_list_data.csv', 'w') do |file|
-      file << ["item", "checked"]
-      list.each{|item| file << [item.item, item.checked]}
+      file << ["item", "checked", "personal", "code"]
+      list.each{|item| file << [item.item, item.checked, item.personal, item.code]}
     end
   end
 
@@ -75,7 +95,10 @@ class TodoList
       file << "My list for #{Date.today}:\n\n"
       array.each do |item|
         checked = item.checked ? item.checked : " "
-        file << "[ #{checked} ] #{item.item}\n"
+        tags = ""
+        tags << "[#{item.personal}]" if item.personal
+        tags << "[#{item.code}]" if item.code
+        file << "[#{checked}] #{item.item} #{tags}\n"
       end
     end
   end

@@ -1,6 +1,7 @@
 require_relative '../model/item'
 require_relative '../model/todo_list'
 require_relative '../view/list_viewer'
+require 'colorize'
 
 class ListManager
   attr_reader :todo_list
@@ -12,16 +13,17 @@ class ListManager
   end
 
   def review_requests(command_array)
-    commands = {"display" => :print_list, "add" => :add, "delete" => :delete,
-      "check off" => :check_off, "check off all" => :check_off_all,
-      "uncheck all" => :uncheck_all,
-      "clear" => :clear_all, "add multiple" => :add_multiple}
+    list_commands = ["add", "add_multiple", "delete", "check_off", "check_off_all", "uncheck_all", "clear_all", "tag", "untag"]
+    view_commands = ["display", "display_by_tag", "show_completed", "show_uncompleted"]
 
-    if commands[command_array[0]]
-      if command_array[0] != "display"
-        @todo_list.send(commands[command_array[0]], command_array[1])
+    if command_array[0]
+      if list_commands.include?(command_array[0])
+        @todo_list.send(command_array[0], command_array[1])
+        display(@todo_list.list)
+      elsif view_commands.include?(command_array[0])
+        self.send(command_array[0])
       end
-      print_list
+
     else
       request_unavailable(command_array[0])
     end
@@ -29,7 +31,7 @@ class ListManager
 
   def interface
     greet
-    print_list
+    display(@todo_list.list)
     while true
       show_commands
       command = get_command.strip
@@ -40,12 +42,17 @@ class ListManager
         argument = educate_on_multiple
       elsif ["add", "delete", "check off"].include?(command)
         argument = get_argument(command)
+      elsif ["tag", "untag"].include?(command)
+        argument = get_argument(command)
+        tag = tag_as_personal_or_code(command)
+        argument = [argument, tag].compact
+      elsif command == "display by tag"
+        argument = ask_for_tag_to_display
       end
 
+      command = command.split.join("_")
       command_array = [command, argument].compact
       review_requests(command_array)
-      onwards = offer_to_quit
-      break if onwards.include?("n")
     end
 
     choice = offer_to_print_list
