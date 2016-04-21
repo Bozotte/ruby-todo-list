@@ -1,13 +1,11 @@
-item_description
-Walk the cat.
-Go to the gym.
-Buy groceries for the week.
-Call Penelope.
-Finish code challenge.
-Book hotel for vacation.
-Pay cable bill.
-Call insurance company.
-Read Ruby Under a Microscope.
-Book eye appointment for new glasses.
-Learn how to pick locks.
-Find good recipe for dinner party.
+item,checked
+Walk the cat,X
+Go to the gym,X
+Buy groceries for the week,
+Call Penelope,
+Finish code challenge,
+Book hotel for vacation,
+Call insurance company,X
+Read Ruby Under a Microscope,
+Book eye appointment for new glasses,
+Find good recipe for dinner party,
