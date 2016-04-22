@@ -21,6 +21,7 @@ class ListManager
         @todo_list.send(command_array[0], command_array[1])
         display(@todo_list.list)
       elsif view_commands.include?(command_array[0])
+        command_array[1].nil? ? command_array[1] = todo_list.list : command_array[1]
         self.send(command_array[0], command_array[1])
       end
 
