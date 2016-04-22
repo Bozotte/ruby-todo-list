@@ -49,7 +49,7 @@ class TodoList
     save
   end
 
-  def clear_all(items)
+  def delete_all(items)
     @list = []
     save
   end

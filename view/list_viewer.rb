@@ -22,13 +22,13 @@ module ListViewer
     display(list)
   end
 
-  def show_completed
+  def show_completed(placeholder)
     list = todo_list.list.select{|item| item.checked }
     puts "\nCompleted:"
     display(list)
   end
 
-  def show_uncompleted
+  def show_uncompleted(placeholder)
     list = todo_list.list.select{|item| item.checked.nil? }
     puts "\nUnfinished:"
     display(list)

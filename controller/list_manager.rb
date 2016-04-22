@@ -13,7 +13,7 @@ class ListManager
   end
 
   def review_requests(command_array)
-    list_commands = ["add", "add_multiple", "delete", "check_off", "check_off_all", "uncheck_all", "clear_all", "tag", "untag"]
+    list_commands = ["add", "add_multiple", "delete", "delete_all", "check_off", "check_off_all", "uncheck_all", "tag", "untag"]
     view_commands = ["display", "display_by_tag", "show_completed", "show_uncompleted"]
 
     if command_array[0]
@@ -21,7 +21,7 @@ class ListManager
         @todo_list.send(command_array[0], command_array[1])
         display(@todo_list.list)
       elsif view_commands.include?(command_array[0])
-        self.send(command_array[0])
+        self.send(command_array[0], command_array[1])
       end
 
     else
@@ -36,7 +36,10 @@ class ListManager
       show_commands
       command = get_command.strip
       break if command == "quit"
-      command = "display" if command.empty?
+      if command.empty? || command == "display"
+        command = "display"
+        argument = @todo_list.list
+      end
 
       if command == "add multiple"
         argument = educate_on_multiple
