@@ -1,13 +1,8 @@
-item_description
-Walk the cat.
-Go to the gym.
-Buy groceries for the week.
-Call Penelope.
-Finish code challenge.
-Book hotel for vacation.
-Pay cable bill.
-Call insurance company.
-Read Ruby Under a Microscope.
-Book eye appointment for new glasses.
-Learn how to pick locks.
-Find good recipe for dinner party.
+item,checked,personal,code
+read POODR,X,,code
+post about Ruby Racer,X,,code
+walk dog,X,,
+eat sushi,X,,
+FALL ASLEEP,X,,
+drool,X,,
+pet Ash,X,,
